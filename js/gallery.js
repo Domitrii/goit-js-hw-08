@@ -87,6 +87,7 @@ return ArrayHtml.join('')
 
 
 function imageScope(event) {
+  event.preventDefault()
     const clickedElement = event.target.closest('.gallery-link');
     if (!clickedElement) {
         return; 
@@ -106,8 +107,16 @@ function imageScope(event) {
                     alt="${description}"
                 />
             </a>
-        </div>
-    `);
+        </div>`,
+        {
+          onShow: () => {
+            document.addEventListener('keydown', closeButton)
+          },
+          onClose: () => {
+          document.addEventListener('keydown', closeButton)  
+          }
+        }
+    );
 
     scopeElem.show();
 
